@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kchahid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2018/10/26 15:19:56 by kchahid           #+#    #+#             */
+/*   Updated: 2018/10/26 15:19:58 by kchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/lem_in.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memalloc(size_t size)
 {
-	t_all all;
+	char	*buff;
 
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
-	return (0);
+	if (!(buff = (void *)malloc(size)))
+		return (NULL);
+	ft_bzero(buff, size);
+	return (buff);
 }

@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bfs_tool.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2019/10/27 17:38:51 by ebatchas          #+#    #+#             */
+/*   Updated: 2019/10/27 17:39:18 by ebatchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/lem_in.h"
 
-int		main(void)
+void	reset_bfs_blocked(t_room_bfs *rooms)
 {
-	t_all all;
+	t_link_bfs	*links;
 
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
-	return (0);
+	while (rooms)
+	{
+		rooms->visited = 0;
+		rooms->blocked = 0;
+		links = rooms->links;
+		while (links)
+		{
+			links->room->blocked = 0;
+			links->blocked = 0;
+			links = links->next;
+		}
+		rooms = rooms->next;
+	}
+}
+
+void	reset_bfs_visited(t_room_bfs *rooms)
+{
+	while (rooms)
+	{
+		rooms->visited = 0;
+		rooms = rooms->next;
+	}
 }

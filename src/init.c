@@ -3,41 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kchahid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 12:31:42 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/10 12:51:44 by ebatchas         ###   ########.fr       */
+/*   Created: 2019/10/28 02:38:49 by kchahid           #+#    #+#             */
+/*   Updated: 2019/10/28 14:09:40 by ebatchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/lemin.h"
+#include "../header/lem_in.h"
 
-void		ft_lemin_init(t_lemin *lem)
+void	init_all(t_all *all)
 {
-	ft_bzero(lem, sizeof(t_lemin));
-	lem->room = ft_strdup("");
-	lem->link = ft_strdup("");
+	if (!(_INPUT = (t_input *)malloc(sizeof(t_input))))
+		error_all(all, 3);
+	if (!(_TMP = (t_tmp*)malloc(sizeof(t_tmp))))
+		error_all(all, 3);
+	_INPUT->count_ant = 0;
+	_INPUT->count_link = 0;
+	_INPUT->count_room = 0;
+	_TMP->index_start = 0;
+	_TMP->index_end = 0;
+	_ROOM = NULL;
+	_LINK = NULL;
+	_START = NULL;
+	_END = NULL;
+	_TMP->first = NULL;
+	_TMP->second = NULL;
+	all->output = NULL;
 }
 
-int			ft_lemin_matrix_init(t_lemin *lem)
+int		parse_input(t_all *all)
 {
-	int		i;
-	int		j;
+	int index;
+
+	index = -1;
+	while ((index = read_line(&_INPUT->line, STDIN)))
+	{
+		if (_INPUT->count_ant == 0)
+			parse_ant(all);
+		else if (ft_strchr(_INPUT->line, '-'))
+		{
+			if (_INPUT->line[0] == '#')
+				continue;
+			if (case_neg(all) == 1)
+				parse_room(all);
+			else
+				parse_link(all);
+		}
+		else
+			parse_room(all);
+		ft_output_push_back(&all->output, _INPUT->line);
+	}
+	if (index == -1)
+		error_all(all, 0);
+	if (_TMP->index_start != 2 || _TMP->index_end != 2)
+		error_all(all, 1);
+	return (ft_output_display(all->output));
+}
+
+int		case_neg(t_all *all)
+{
+	int i;
 
 	i = -1;
-	if (!(lem->map = ft_memalloc(sizeof(char *) * lem->nbr_room)))
-		return (-1);
-	if (!(lem->room_name = ft_memalloc(sizeof(char *) * (lem->nbr_room + 1))))
-		return (-1);
-	while (++i < lem->nbr_room)
+	while (_INPUT->line[++i])
 	{
-		j = -1;
-		if (!(lem->map[i] = ft_memalloc(sizeof(char) * lem->nbr_room)))
-			return (-1);
-		lem->room_name[i] = NULL;
-		while (++j < lem->nbr_room)
-			lem->map[i][j] = '\0';
+		if (_INPUT->line[i] == '-' && _INPUT->line[i - 1] == ' ')
+			return (1);
 	}
-	lem->room_name[i] = NULL;
 	return (0);
 }

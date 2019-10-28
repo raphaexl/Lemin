@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kchahid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2018/10/26 15:24:25 by kchahid           #+#    #+#             */
+/*   Updated: 2018/10/26 15:24:26 by kchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/lem_in.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	t_all all;
+	unsigned int i;
+	unsigned int j;
 
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
-	return (0);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		i++;
+	while (s2[j])
+	{
+		s1[i] = s2[j];
+		i++;
+		j++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

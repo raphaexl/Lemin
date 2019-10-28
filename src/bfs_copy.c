@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   bfs_path2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2019/10/27 17:17:42 by ebatchas          #+#    #+#             */
+/*   Updated: 2019/10/27 17:31:32 by ebatchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/lem_in.h"
 
-int		main(void)
+t_path		*ft_paths_copy(t_path *paths)
 {
-	t_all all;
+	t_path	*path;
 
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
-	return (0);
+	path = 0;
+	while (paths)
+	{
+		add_path_to_struct(&path, create_new_path(paths->rooms));
+		paths = paths->next;
+	}
+	return (path);
+}
+
+t_room_bfs	*ft_rooms_copy(t_room_bfs *rooms)
+{
+	t_room_bfs	*path;
+
+	path = NULL;
+	while (rooms)
+	{
+		add_room_to_struct_bfs(&path, create_new_room_bfs(rooms->value));
+		rooms = rooms->next;
+	}
+	return (path);
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kchahid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2018/10/26 15:27:26 by kchahid           #+#    #+#             */
+/*   Updated: 2018/10/26 15:27:27 by kchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/lem_in.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_all all;
+	unsigned int	i;
+	char			*buff;
 
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
+	buff = (char *)s;
+	i = ft_strlen(s) + 1;
+	while (i-- > 0)
+		if (s[i] == c)
+			return (&buff[i]);
 	return (0);
 }

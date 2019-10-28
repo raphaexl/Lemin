@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kchahid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/27 18:36:44 by ebatchas          #+#    #+#             */
-/*   Updated: 2019/10/28 13:16:21 by ebatchas         ###   ########.fr       */
+/*   Created: 2018/10/26 15:16:18 by kchahid           #+#    #+#             */
+/*   Updated: 2018/10/26 15:17:18 by kchahid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/lem_in.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_isalpha(int c)
 {
-	t_all all;
-
-	init_all(&all);
-	if (parse_input(&all) == 0)
-		error_all(&all, 0);
-	solve(&all);
-	free_env(&all);
+	if (c >= 97 && c <= 122)
+		return (1);
+	if (c >= 65 && c <= 90)
+		return (1);
 	return (0);
 }

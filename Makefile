@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ebatchas <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: kchahid <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/09/29 12:37:16 by ebatchas          #+#    #+#              #
-#    Updated: 2019/10/10 12:27:45 by ebatchas         ###   ########.fr        #
+#    Created: 2019/10/28 22:45:50 by kchahid           #+#    #+#              #
+#    Updated: 2019/10/28 22:45:54 by kchahid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,18 @@ PWD=\"$(shell pwd)\"
 SRCDIR = src
 OBJDIR = obj
 BINDIR = .
-HEADDIR = inc
+HEADDIR = header
 
 LIBFTDIR=libft
-LIBFT_HEADDIR=incs
+LIBFT_HEADDIR=header
 LIBFT = $(LIBFTDIR)/libft.a
 
 DONE_COLOR=\x1b[34;03m
 EOC=\033[0m
 
-SRCS_NO_PREFIX = main.c init.c parse.c parse_tools.c matrix.c check_map.c
+SRCS_NO_PREFIX = backtrack_bfs.c bfs_group.c bfs_path.c bfs_room.c bfs_score.c bfs_tool.c bfs_copy.c breadth_first_search.c error.c free_env.c init.c display.c solve.c link_bfs.c main.c ant.c print.c parse_ant.c parse_link.c parse_room.c queue_tools.c read_line.c tools_element.c special_case.c output.c
 
-INCS_NO_PREFIX  = lemin.h
+INCS_NO_PREFIX  = lem_in.h
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRCS_NO_PREFIX))
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS_NO_PREFIX:%.c=%.o))
